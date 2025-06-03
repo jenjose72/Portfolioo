@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'Jen Jose Jeeson - Portfolio',
   description: 'Contact me using this portfolio website.',
   icons:{
-    icon:'/favicon/favicon.ico',
+    icon:'/favicon/JJJ.png',
   }
 }
 
