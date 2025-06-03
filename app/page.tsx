@@ -26,6 +26,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { useRef } from "react";
 import emailjs from "@emailjs/browser";
+import HideScrollbar from '@/components/HideScrollbar';
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -184,6 +185,7 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white overflow-x-hidden">
       {/* Custom CSS for animations */}
+      <HideScrollbar />
       <style jsx>{`
         @keyframes slideInFromLeft {
           0% {
@@ -305,6 +307,7 @@ export default function Portfolio() {
           content: '|';
           animation: blink 1s infinite;
         }
+          
 
         @keyframes blink {
           0%, 50% { opacity: 1; }
