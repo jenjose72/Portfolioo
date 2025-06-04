@@ -1,5 +1,6 @@
 "use client"
 
+import Head from 'next/head';
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -171,18 +172,44 @@ export default function Portfolio() {
       category: "Web Development / Mobile Development",
     },
     {
-      title: "BMStats",
+      title: "MovieVerse",
       description:
-        "A statistics website for Manchester City Football Club, built with React JS. Features include player stats and management.",
-      image: "/web/Bmstats.png",
-      tech: ["React.js", "Express.js", "PostgreSQL", "Node.js"],
-      live: "https://bluemoonstats.onrender.com/",
-      github: "https://github.com/jenjose72/BMStats",
+       "A cross-platform movie discovery app that combines user ratings with emotional intelligence. Users can rate movies and get mood-based recommendations. Feeling happy, sad, or nostalgic? MovieVerse has a pick for every vibe. Features swipeable Tinder-style movie cards and a mood-input system for personalized curation.",
+      image: "/web/mv.png",
+      tech: ["React Native", "React", "Django","PostgreSQL"],
+      live: "https://movieverse-nine.vercel.app",
+      github: "https://github.com/jefin10/MovieVerse",
       category: "Mobile Development",
     },
   ]
 
   return (
+    <>
+     <Head>
+        <title>Jen Jose Jeeson | Portfolio</title>
+        <meta name="description" content="Official portfolio of Jen Jose Jeeson – software developer showcasing projects, skills, and experience." />
+        <meta name="keywords" content="Jen Jose Jeeson, software developer, portfolio, web developer" />
+        <meta name="author" content="Jen Jose Jeeson" />
+        <link rel="canonical" href="https://jenjosejeeson.vercel.app" />
+        
+        {/* Schema.org markup for Google */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Jen Jose Jeeson",
+              "url": "https://jenjosejeeson.vercel.app",
+              "jobTitle": "Software Developer",
+              "sameAs": [
+                "https://www.linkedin.com/in/jenjosejeeson/",
+                "https://github.com/jenjose72"
+              ]
+            }),
+          }}
+        />
+      </Head>
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white overflow-x-hidden">
       {/* Custom CSS for animations */}
       <HideScrollbar />
@@ -913,6 +940,7 @@ export default function Portfolio() {
         </div>
       </footer>
     </div>
+  </>
   )
 }
 
