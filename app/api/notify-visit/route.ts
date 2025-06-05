@@ -1,33 +1,45 @@
-// pages/api/notify-visit.ts
-
+import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-export default async function handler(req, res) {
-  const visitorIP =
-    req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+export async function POST(req: NextRequest) {
+  // Get visitor's IP address
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    req.ip || 
+    "Unknown IP";
 
-  // Set up the email transporter
+  //console.log("📍 Visitor IP:", ip);
+
+  // Setup mail transporter
   const transporter = nodemailer.createTransport({
-    service: "gmail", // works for Gmail
+    service: "gmail",
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
     },
   });
 
-  // Email content
   const mailOptions = {
-    from: `"Portfolio Bot" <${process.env.EMAIL_USER}>`,
+    from: process.env.EMAIL_USER,
     to: process.env.NOTIFY_EMAIL,
-    subject: "🚨 New Portfolio Visit",
-    text: `Someone visited your portfolio from IP: ${visitorIP}`,
+    subject: "🚨 New Visit to Portfolio",
+    text: `Someone visited your site.\n\n📍 IP Address: ${ip}`,
   };
 
   try {
     await transporter.sendMail(mailOptions);
-    res.status(200).json({ message: "Notification sent" });
-  } catch (err) {
-    console.error("Error sending email:", err);
-    res.status(500).json({ error: "Failed to send email" });
+    //console.log("✅ Email sent with IP:", ip);
+    return NextResponse.json({ message: "Email sent with IP address" });
+  } catch (error) {
+    console.error("❌ Email error:", error);
+    return NextResponse.json(
+      { error: "Failed to send email" },
+      { status: 500 }
+    );
   }
+}
+
+// Optional GET handler to show method not allowed
+export function GET() {
+  return NextResponse.json({ message: "Method Not Allowed" }, { status: 405 });
 }

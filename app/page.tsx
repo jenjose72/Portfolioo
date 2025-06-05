@@ -55,8 +55,13 @@ export default function Portfolio() {
   }, [])
 
    useEffect(() => {
-    fetch("/api/notify-visit", { method: "POST" });
-  }, []);
+  fetch("/api/notify-visit", {
+    method: "POST",
+  })
+    .then((res) => res.json())
+    .then((data) => console.log("📩 Visit notification sent:", data))
+    .catch((err) => console.error("❌ Notification error:", err));
+}, []);
 
   useEffect(() => {
     const handleScroll = () => {
