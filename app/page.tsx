@@ -54,6 +54,10 @@ export default function Portfolio() {
     return () => window.removeEventListener("mousemove", handleMouseMove)
   }, [])
 
+   useEffect(() => {
+    fetch("/api/notify-visit", { method: "POST" });
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       const sections = ["home", "about", "skills", "projects", "education", "contact"]
